@@ -1,28 +1,32 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+Piggy Bank Header File
 
-# Precompiled Headers
-*.gch
-*.pch
+#ifndef clsPiggyBank_h #define clsPiggyBank_h
+class clsPiggyBank { public: clsPiggyBank(void);
+float getBalance ( ) const { return balance; } void money_in ( float ); void money_out ( float );
+protected: float balance; };
+#endif
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+Piggy Bank Code 1
 
-# Fortran module files
-*.mod
+#include "clsPiggyBank.h" #include <iostream> using std::cout; using std::endl;
+clsPiggyBank::clsPiggyBank(void) { balance = 0; } 
+void clsPiggyBank::money_in( float amount ) { balance+=amount; /* balance = balance+amount*/ } void clsPiggyBank::money_out( float amount) { if(balance>amount) balance-=amount; 
+else 
+cout<<"There is not enough money in account"<<endl;
+}
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+Piggy Bank Code 2
 
-# Executables
-*.exe
-*.out
-*.app
+#include "clsPiggyBank.h" #include <iostream> using std::cout; using std::cin; using std::endl;
+int main() { clsPiggyBank mypiggy, mypiggy2; int account; 
+cout<<"What account would you like to deposit 5 in (0 or 1)?"<<endl;
+cin>>account; switch (account) {case 0: mypiggy.money_in(5); case 1: mypiggy2.money_in(5); default: break;}
+mypiggy.money_in(0),mypiggy2.money_in(0); 
+cout<<"The balance in mypiggy, mypiggy2 is "<< mypiggy.getBalance()<<","<<mypiggy2.getBalance ()<<endl;
+mypiggy.money_in(5); 
+cout<<"Depositing 5 to mypiggy gives "<<mypiggy.getBalance()<<endl; mypiggy.money_out (3); 
+cout<<"Subtracting 3 to mypiggy gives "<<mypiggy.getBalance()<<endl; cout<<"Test for subtracting too much from mypiggy2"<<endl; 
+mypiggy2.money_out (3); cout<<"Subtracting 3 to mypiggy2 gives "<<mypiggy2.getBalance()<<endl;
+}
+/*float getBalance ( ) const { return balance; } void money_in ( float ); void money_out ( float );*/
+End Result – Compiled Program
